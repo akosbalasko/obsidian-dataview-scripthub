@@ -1,18 +1,18 @@
-name: scrape-scripts
+name: data
 on:
+  schedule:
+    - cron: 0 0 1 1 1
+  workflow_dispatch: {}
   push:
-    branches:
-      - action-test-branch
+    paths:
+      - .github/workflows/flat.yml
+      - ./scripts/scraper-post-process.ts
 jobs:
-  create-branch:
+  scheduled:
     runs-on: ubuntu-latest
     steps:
-      - uses: peterjgrainger/action-create-branch@v2.0.1
-        env: 
-          GITHUB_TOKEN: ${{ secrets.SCRIPTHUB_ACCESS_TOKEN }}
-        with:
-          branch: 'scripts-updated'
-      - uses: denoland/setup-deno@main
+      - name: Setup deno
+        uses: denoland/setup-deno@main
         with:
           deno-version: v1.x
       - name: Check out repo
@@ -23,6 +23,3 @@ jobs:
           http_url: https://forum.obsidian.md/t/dataview-plugin-snippet-showcase/13673
           downloaded_filename: dataview-plugin-snippet-showcase.html
           postprocess: ./scripts/scraper-post-process.ts
-
-
-
