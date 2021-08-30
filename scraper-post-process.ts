@@ -40,4 +40,3 @@ for (const codePosts of dataviewCodes){
     const fileName =`${codePosts.creator?.name || ''}_${codePosts.datePublished?.getTime()}.md` 
     await Deno.writeTextFile(`./scripts/${fileName}`, content);
 }
-console.log(JSON.stringify(dataviewCodes));// Pluck a specific key off
