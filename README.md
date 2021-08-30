@@ -5,3 +5,4 @@ It's a common place for all of the awesome scripts developed on top of Obisidian
 
 Feel free to share your own by creating a Pull Request with you code! 
 
+
