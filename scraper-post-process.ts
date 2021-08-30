@@ -36,7 +36,7 @@ await posts.each(function(index, data) {
 );
 const dataviewCodes = rawData.filter(post => post.content?.includes('```dataview'));
 for (const codePosts of dataviewCodes){
-    const content = `---\ntitle:\nauthor:${codePosts.creator.name} (${codePosts.creator.url})\npublication date: ${codePosts.datePublished}\n---\n\n ${codePosts.content}`
+    const content = `---\ntitle:\nauthor:${codePosts?.creator?.name} (${codePosts?.creator?.url})\npublication date: ${codePosts.datePublished}\n---\n\n ${codePosts.content}`
     const fileName =`${codePosts.creator?.name || ''}_${codePosts.datePublished?.getTime()}.md` 
     await Deno.writeTextFile(`./scripts/${fileName}`, content);
 }
