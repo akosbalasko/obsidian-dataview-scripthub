@@ -22,7 +22,7 @@ jobs:
         with:
           http_url: https://forum.obsidian.md/t/dataview-plugin-snippet-showcase/13673
           downloaded_filename: dataview-plugin-snippet-showcase.html
-          postprocess: ./scripts/scraper-post-process.ts
-
-
+          postprocess: ./scraper-post-process.ts
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v3
 
