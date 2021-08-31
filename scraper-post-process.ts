@@ -1,4 +1,3 @@
-import { readJSON, writeJSON } from 'https://deno.land/x/flat/mod.ts'
 import { cheerio } from "https://deno.land/x/cheerio@1.0.4/mod.ts";
 
 interface Post {
@@ -37,7 +36,7 @@ await posts.each(function(index, data) {
 );
 const dataviewCodes = rawData.filter(post => post.content?.includes('```dataview'));
 for (const codePosts of dataviewCodes){
-    const fileName =`${codePosts.creator?.name || ''}_${codePosts.datePublished?.getTime()}.json` 
-    await writeJSON(`./scripts/${fileName}`, codePosts);
+    const content = `---\ntitle:\nauthor:${codePosts?.creator?.name} (${codePosts?.creator?.url})\npublication date: ${codePosts.datePublished}\n---\n\n ${codePosts.content}`
+    const fileName =`${codePosts.creator?.name || ''}_${codePosts.datePublished?.getTime()}.md` 
+    await Deno.writeTextFile(`./scripts/${fileName}`, content);
 }
-console.log(JSON.stringify(dataviewCodes));// Pluck a specific key off
